@@ -1,0 +1,15 @@
+.svn/
+
+*.o
+*.so
+*.a
+*.pyc
+lib/
+
+src/TotemEvent_LinkDef.h
+src/eventdictT*
+src/TotemEvent_LinkDefh
+
+*~
+.#*
+#*#
