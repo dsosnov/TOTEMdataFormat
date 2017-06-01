@@ -6,13 +6,11 @@ LDFLAGS+=$(shell root-config --glibs)  -ggdb3
 
 LINKD=$(SRC)/TotemEvent_LinkDef
 
-
 all: $(OBJ) $(OBJ)/libTOTEMdataFormat.so 
-
-
 
 $(OBJ)/libTOTEMdataFormat.so: $(OBJ)/T2Event.o $(OBJ)/T1Event.o $(OBJ)/TriggerData.o $(OBJ)/EventMetaData.o $(OBJ)/RPRootDumpDigiInfo.o $(OBJ)/RPEvent.o $(OBJ)/RPRootDumpPattern.o $(OBJ)/RPRootDumpPatternInfo.o $(OBJ)/RPRootDumpReconstructedProton.o $(OBJ)/RPRootDumpReconstructedProtonPair.o $(OBJ)/RPRootDumpTrackInfo.o $(OBJ)/NtupleInfo.o $(OBJ)/eventdictT.o 
 	$(CXX) -shared -o $@ $^ $(LDFLAGS) # order important for Ubuntu
+	if [ ! -s $(OBJ)/eventdictT_rdict.pcm ] ; then ln -s $(SRC)leventdictT_rdict.pcm $(OBJ)/ ; fi
 	@echo ""
 	#to load the library to CINT one needs X connection
 	@echo ""
@@ -25,6 +23,7 @@ $(SRC)/eventdictT.cc: $(SRC)/T2Event.h $(SRC)/T1Event.h $(SRC)/TriggerData.h $(S
 	rootcint -f $@ -c -p $^
 	#compatibility with cmssw
 	mv $(LINKD).h $(LINKD)h
+	ln -s $(SRC)/eventdictT_rdict.pcm $(OBJ)/
 	@echo ""
 
 $(LINKD).h:
