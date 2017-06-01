@@ -1,4 +1,4 @@
-.svn/
+#.gitignore
 
 *.o
 *.so
@@ -7,8 +7,8 @@
 lib/
 
 src/TotemEvent_LinkDef.h
-src/eventdictT*
 src/TotemEvent_LinkDefh
+src/eventdictT*
 
 *~
 .#*
