@@ -7,7 +7,6 @@
 lib/
 
 src/TotemEvent_LinkDef.h
-src/TotemEvent_LinkDefh
 src/eventdictT*
 
 *~
