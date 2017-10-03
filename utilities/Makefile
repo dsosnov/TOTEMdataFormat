@@ -1,10 +1,11 @@
 SRC=../src
 OBJ=../lib
+INTERFACE=../interface
 
-CXXFLAGS+=$(shell root-config --cflags) -Wall -I$(SRC) -ggdb3 -fPIC
+CXXFLAGS+=$(shell root-config --cflags) -Wall -I$(SRC) -I$(INTERFACE) -ggdb3 -fPIC
 LDFLAGS+=$(shell root-config --glibs)  -ggdb3 
 
-LINKD=$(SRC)/TotemEvent_LinkDef
+LINKD=$(INTERFACE)/TotemEvent_LinkDef
 
 all: $(OBJ) $(OBJ)/libTOTEMdataFormat.so 
 
@@ -19,7 +20,7 @@ $(OBJ)/%.o: $(SRC)/%.cc
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	@echo ""
 
-$(SRC)/eventdictT.cc: $(SRC)/T2Event.h $(SRC)/T1Event.h $(SRC)/TriggerData.h $(SRC)/EventMetaData.h $(SRC)/RPRootDumpDigiInfo.h $(SRC)/RPEvent.h $(SRC)/RPRootDumpPattern.h $(SRC)/RPRootDumpPatternInfo.h $(SRC)/RPRootDumpReconstructedProton.h $(SRC)/RPRootDumpReconstructedProtonPair.h $(SRC)/RPRootDumpTrackInfo.h $(SRC)/NtupleInfo.h $(LINKD).h
+$(SRC)/eventdictT.cc: $(INTERFACE)/T2Event.h $(INTERFACE)/T1Event.h $(INTERFACE)/TriggerData.h $(INTERFACE)/EventMetaData.h $(INTERFACE)/RPRootDumpDigiInfo.h $(INTERFACE)/RPEvent.h $(INTERFACE)/RPRootDumpPattern.h $(INTERFACE)/RPRootDumpPatternInfo.h $(INTERFACE)/RPRootDumpReconstructedProton.h $(INTERFACE)/RPRootDumpReconstructedProtonPair.h $(INTERFACE)/RPRootDumpTrackInfo.h $(INTERFACE)/NtupleInfo.h $(LINKD).h
 	rootcint -f $@ -c -p $^
 	#compatibility with cmssw
 	mv $(LINKD).h $(LINKD)h
