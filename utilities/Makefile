@@ -2,7 +2,7 @@ SRC=../src
 OBJ=../lib
 INTERFACE=../interface
 
-CXXFLAGS+=$(shell root-config --cflags) -Wall -I$(SRC) -I$(INTERFACE) -ggdb3 -fPIC
+CXXFLAGS+=$(shell root-config --cflags) -Wall -I$(SRC) -I$(INTERFACE) -ggdb3 -fPIC -O2
 LDFLAGS+=$(shell root-config --glibs)  -ggdb3 
 
 LINKD=$(INTERFACE)/TotemEvent_LinkDef
